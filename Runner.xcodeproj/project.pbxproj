@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7803FBCE1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7803FBCD1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift */; };
 		7857681D1D815B0900F79D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7857681C1D815B0900F79D88 /* AppDelegate.swift */; };
 		785768221D815B0900F79D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 785768201D815B0900F79D88 /* Main.storyboard */; };
 		785768241D815B0900F79D88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 785768231D815B0900F79D88 /* Assets.xcassets */; };
 		785768271D815B0900F79D88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 785768251D815B0900F79D88 /* LaunchScreen.storyboard */; };
+		7888AC961D87F156002AECF3 /* TraningPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888AC951D87F156002AECF3 /* TraningPlanViewController.swift */; };
 		789E0A7A1D829442001B6867 /* CalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789E0A791D829441001B6867 /* CalendarTableViewController.swift */; };
 		789E0A7C1D8294BA001B6867 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789E0A7B1D8294BA001B6867 /* CalendarTableViewCell.swift */; };
 		789E0A7E1D829842001B6867 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789E0A7D1D829842001B6867 /* Calendar.swift */; };
+		789E0A801D82B7C2001B6867 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 789E0A7F1D82B7C2001B6867 /* GoogleService-Info.plist */; };
 		93351D66EF8F513755355D87 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C2799F8BD06B0B6488723A3 /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
@@ -21,15 +24,18 @@
 		0C2799F8BD06B0B6488723A3 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DF733DB43DD4B1AD13021E9 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		6FCD255F4ED1D4B31DC62EA2 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
+		7803FBCD1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewHeaderCell.swift; sourceTree = "<group>"; };
 		785768191D815B0900F79D88 /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7857681C1D815B0900F79D88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		785768211D815B0900F79D88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		785768231D815B0900F79D88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		785768261D815B0900F79D88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		785768281D815B0900F79D88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7888AC951D87F156002AECF3 /* TraningPlanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraningPlanViewController.swift; sourceTree = "<group>"; };
 		789E0A791D829441001B6867 /* CalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewController.swift; sourceTree = "<group>"; };
 		789E0A7B1D8294BA001B6867 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		789E0A7D1D829842001B6867 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		789E0A7F1D82B7C2001B6867 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +89,13 @@
 			isa = PBXGroup;
 			children = (
 				789E0A7B1D8294BA001B6867 /* CalendarTableViewCell.swift */,
+				7803FBCD1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift */,
 				7857681C1D815B0900F79D88 /* AppDelegate.swift */,
 				785768201D815B0900F79D88 /* Main.storyboard */,
 				789E0A791D829441001B6867 /* CalendarTableViewController.swift */,
 				789E0A7D1D829842001B6867 /* Calendar.swift */,
 				785768251D815B0900F79D88 /* LaunchScreen.storyboard */,
+				7888AC951D87F156002AECF3 /* TraningPlanViewController.swift */,
 				789E0A781D828DF0001B6867 /* Supporting Files */,
 			);
 			path = Runner;
@@ -96,6 +104,7 @@
 		789E0A781D828DF0001B6867 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				789E0A7F1D82B7C2001B6867 /* GoogleService-Info.plist */,
 				785768231D815B0900F79D88 /* Assets.xcassets */,
 				785768281D815B0900F79D88 /* Info.plist */,
 			);
@@ -165,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				785768271D815B0900F79D88 /* LaunchScreen.storyboard in Resources */,
+				789E0A801D82B7C2001B6867 /* GoogleService-Info.plist in Resources */,
 				785768241D815B0900F79D88 /* Assets.xcassets in Resources */,
 				785768221D815B0900F79D88 /* Main.storyboard in Resources */,
 			);
@@ -227,7 +237,9 @@
 			files = (
 				7857681D1D815B0900F79D88 /* AppDelegate.swift in Sources */,
 				789E0A7A1D829442001B6867 /* CalendarTableViewController.swift in Sources */,
+				7888AC961D87F156002AECF3 /* TraningPlanViewController.swift in Sources */,
 				789E0A7C1D8294BA001B6867 /* CalendarTableViewCell.swift in Sources */,
+				7803FBCE1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift in Sources */,
 				789E0A7E1D829842001B6867 /* Calendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,8 @@
 import UIKit
 
 class CalendarTableViewCell: UITableViewCell {
-
     //MARK: Model
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet weak var weekLabel: UILabel!
 }

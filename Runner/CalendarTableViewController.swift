@@ -7,8 +7,26 @@
 //
 
 import UIKit
+import Firebase
 
 class CalendarTableViewController: UITableViewController {
+    
+    private var _myRootRef : FIRDatabaseReference? = nil
+    var myRootRef : FIRDatabaseReference {
+        get{
+            if _myRootRef == nil {
+               _myRootRef = FIRDatabase.database().reference()
+                
+                // debug login
+                FIRAuth.auth()?.signInWithEmail("shumaher2000@mail.ru", password: "test1234")
+                { (user, error) in
+                    // ...
+                }
+            }
+            return _myRootRef!
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +40,27 @@ class CalendarTableViewController: UITableViewController {
     }
 
     // MARK: Properties
-    var calendar = Calendar(count: 10)
+    //var calendar = Calendar(count: 10)
     
     // initilize calendar
     private func InitCalendar()
     {
+        if let user = FIRAuth.auth()?.currentUser {
+            for profile in user.providerData{
+                let uid = profile.uid
+                let userref = myRootRef.child("Noice")
+                userref.setValue([uid,"Do you have data? you will love Firebase"])
+                
+            }
+            
+        }
+        
+        
+        
+        myRootRef.observeEventType(.Value, withBlock: {
+            shapshot in
+            print("\(shapshot.key)->\(shapshot.value)")
+        })
         
     }
     
@@ -39,7 +73,7 @@ class CalendarTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
+    /*
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return calendar.days.count
     }
@@ -50,7 +84,7 @@ class CalendarTableViewController: UITableViewController {
         cell.dateLabel.text = day.day
         return cell
     }
-    
+    */
 }
         
         
