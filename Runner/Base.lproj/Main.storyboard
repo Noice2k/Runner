@@ -121,8 +121,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6t0-hZ-AKO">
-                                                    <rect key="frame" x="18" y="6" width="25" height="23"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6t0-hZ-AKO">
+                                                    <rect key="frame" x="18" y="11" width="25" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="4Y2-ex-9Wg"/>
                                                     </constraints>
@@ -130,16 +130,16 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TI1-dM-89u">
-                                                    <rect key="frame" x="45" y="0.0" width="38" height="35"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TI1-dM-89u">
+                                                    <rect key="frame" x="48" y="5" width="38" height="35"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mh-gf-RyH">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mh-gf-RyH">
                                                             <rect key="frame" x="0.0" y="0.0" width="38" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7n-DZ-CyR">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7n-DZ-CyR">
                                                             <rect key="frame" x="0.0" y="17" width="38" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -150,11 +150,15 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="0.8098599137931034" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="TI1-dM-89u" firstAttribute="centerY" secondItem="6t0-hZ-AKO" secondAttribute="centerY" id="PMd-dP-yBW"/>
-                                                <constraint firstItem="TI1-dM-89u" firstAttribute="leading" secondItem="6t0-hZ-AKO" secondAttribute="trailing" constant="2" id="Zvl-WV-mEs"/>
-                                                <constraint firstItem="6t0-hZ-AKO" firstAttribute="leading" secondItem="uzX-R0-ure" secondAttribute="leadingMargin" constant="10" id="yDw-Qw-C59"/>
+                                                <constraint firstItem="TI1-dM-89u" firstAttribute="leading" secondItem="6t0-hZ-AKO" secondAttribute="trailing" constant="5" id="Z5q-3m-Nbo"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="6t0-hZ-AKO" firstAttribute="centerY" secondItem="6xl-us-EUP" secondAttribute="centerY" id="hkj-Mv-wMG"/>
+                                            <constraint firstItem="6t0-hZ-AKO" firstAttribute="leading" secondItem="6xl-us-EUP" secondAttribute="leading" constant="18" id="kTB-Fy-yp9"/>
+                                            <constraint firstItem="TI1-dM-89u" firstAttribute="centerY" secondItem="6xl-us-EUP" secondAttribute="centerY" id="vgk-Xe-1Tq"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="dayLabel" destination="6t0-hZ-AKO" id="ibc-P3-cq1"/>
                                             <outlet property="monthLabel" destination="2mh-gf-RyH" id="zPb-JA-rRN"/>

@@ -42,23 +42,26 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
         static let cellWeekIdentificator = "Calendar Week Cell"
     }
     
+    @IBAction func TapToShowAndEditDay(sender: AnyObject) {
+    
+    }
     
     // MARK: model
     var calendar : Calendar?
     
     
-    // Number of section, current - 0
+    // Number of section, current
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return calendar!.weeks.count
     }
     
-    
+    // number of rows in section
     func tableView(tableView: UITableView, numberOfRowsInSection section:Int) -> Int
     {
         return calendar!.weeks[section].days.count
     }
     
-    
+    // get day cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(CellNames.cellDayIdentificator) as! CalendarTableViewCell
@@ -70,6 +73,7 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+    // get week header cell
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCellWithIdentifier(CellNames.cellWeekIdentificator) as! CalendarTableViewHeaderCell
         let week = calendar!.weeks[section]

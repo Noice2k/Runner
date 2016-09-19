@@ -20,6 +20,8 @@ public class CalendarDay
     var dayOfWeek: Int
     var month : Int
     
+    
+    
     init(day: NSDate,dayOfWeek: Int, month : Int)
     {
         let df = NSDateFormatter()
@@ -68,7 +70,7 @@ class Calendar
         
         let formater = NSDateFormatter()
         formater.dateFormat = "yyyy-MM-dd"
-        formater.timeZone = NSTimeZone.localTimeZone()
+        formater.timeZone = NSTimeZone(abbreviation: "GMT")
         
         if let firstdate = formater.dateFromString(str){
             // add all days for current year
@@ -76,16 +78,20 @@ class Calendar
                 // get new day data
                 if let newdate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: i, toDate: firstdate, options: []) {
                     // create new week
-                    let weekId = NSCalendar.currentCalendar().component(.WeekOfYear, fromDate: newdate)
+                    var weekId = NSCalendar.currentCalendar().component(.WeekOfYear, fromDate: newdate)
+                    let dayofweek = NSCalendar.currentCalendar().component(.Weekday, fromDate: newdate)
+                    
+                    if dayofweek == 1 {
+                        weekId -= 1
+                    }
                     if weekId > weeks.count{
                         let currentWeek = CalendarWeek(weekid: weekId);
                         weeks += [currentWeek]
                     }
                     // get the day attribute
                     let month = NSCalendar.currentCalendar().component(.Month, fromDate: newdate)
-                    let dayofweek = NSCalendar.currentCalendar().component(.Weekday, fromDate: newdate)
                     let newday = CalendarDay(day:newdate,dayOfWeek: dayofweek, month: month)
-                    weeks[weekId-1].days += [newday]
+                    weeks[weekId].days += [newday]
                 }
                 
             }

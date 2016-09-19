@@ -67,6 +67,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7836BB121D8FC1A5007C35A1 /* CalandarViewFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7803FBCD1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift */,
+				789E0A7B1D8294BA001B6867 /* CalendarTableViewCell.swift */,
+				789E0A7D1D829842001B6867 /* Calendar.swift */,
+				789E0A791D829441001B6867 /* CalendarTableViewController.swift */,
+				7888AC951D87F156002AECF3 /* TraningPlanViewController.swift */,
+			);
+			name = CalandarViewFiles;
+			sourceTree = "<group>";
+		};
 		785768101D815B0900F79D88 = {
 			isa = PBXGroup;
 			children = (
@@ -88,14 +100,9 @@
 		7857681B1D815B0900F79D88 /* Runner */ = {
 			isa = PBXGroup;
 			children = (
-				789E0A7B1D8294BA001B6867 /* CalendarTableViewCell.swift */,
-				7803FBCD1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift */,
+				7836BB121D8FC1A5007C35A1 /* CalandarViewFiles */,
 				7857681C1D815B0900F79D88 /* AppDelegate.swift */,
 				785768201D815B0900F79D88 /* Main.storyboard */,
-				789E0A791D829441001B6867 /* CalendarTableViewController.swift */,
-				789E0A7D1D829842001B6867 /* Calendar.swift */,
-				785768251D815B0900F79D88 /* LaunchScreen.storyboard */,
-				7888AC951D87F156002AECF3 /* TraningPlanViewController.swift */,
 				789E0A781D828DF0001B6867 /* Supporting Files */,
 			);
 			path = Runner;
@@ -104,6 +111,7 @@
 		789E0A781D828DF0001B6867 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				785768251D815B0900F79D88 /* LaunchScreen.storyboard */,
 				789E0A7F1D82B7C2001B6867 /* GoogleService-Info.plist */,
 				785768231D815B0900F79D88 /* Assets.xcassets */,
 				785768281D815B0900F79D88 /* Info.plist */,
