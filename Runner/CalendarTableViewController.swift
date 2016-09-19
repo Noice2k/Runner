@@ -11,14 +11,14 @@ import Firebase
 
 class CalendarTableViewController: UITableViewController {
     
-    private var _myRootRef : FIRDatabaseReference? = nil
+    fileprivate var _myRootRef : FIRDatabaseReference? = nil
     var myRootRef : FIRDatabaseReference {
         get{
             if _myRootRef == nil {
                _myRootRef = FIRDatabase.database().reference()
                 
                 // debug login
-                FIRAuth.auth()?.signInWithEmail("shumaher2000@mail.ru", password: "test1234")
+                FIRAuth.auth()?.signIn(withEmail: "shumaher2000@mail.ru", password: "test1234")
                 { (user, error) in
                     // ...
                 }
@@ -43,7 +43,7 @@ class CalendarTableViewController: UITableViewController {
     //var calendar = Calendar(count: 10)
     
     // initilize calendar
-    private func InitCalendar()
+    fileprivate func InitCalendar()
     {
         if let user = FIRAuth.auth()?.currentUser {
             for profile in user.providerData{
@@ -57,7 +57,7 @@ class CalendarTableViewController: UITableViewController {
         
         
         
-        myRootRef.observeEventType(.Value, withBlock: {
+        myRootRef.observe(.value, with: {
             shapshot in
             print("\(shapshot.key)->\(shapshot.value)")
         })
@@ -70,7 +70,7 @@ class CalendarTableViewController: UITableViewController {
     // MARK: Navigtion
     
     // Number of section, current - 0
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     /*

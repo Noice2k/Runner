@@ -17,12 +17,12 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     // initilaze the calendar object
-    private func InitCalandar() {
+    fileprivate func InitCalandar() {
         // create the calendar
-        calendar = Calendar(year: NSCalendar.currentCalendar().currentYear)
+        calendar = Calendar(year: Foundation.Calendar.current.currentYear)
         // set the current day as visible day
-        let indexpath = NSIndexPath(forRow: 0, inSection: NSCalendar.currentCalendar().currentWeek-1)
-        calendarView.selectRowAtIndexPath(indexpath, animated: true, scrollPosition: .Top)
+        let indexpath = IndexPath(row: 0, section: Foundation.Calendar.current.currentWeek-1)
+        calendarView.selectRow(at: indexpath, animated: true, scrollPosition: .top)
     }
     
     
@@ -37,12 +37,13 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: Constants
     
-    private struct CellNames {
+    fileprivate struct Constants {
         static let cellDayIdentificator = "Calendar Day Cell"
         static let cellWeekIdentificator = "Calendar Week Cell"
+        static let cellEditSegue = "Edit Day"
     }
     
-    @IBAction func TapToShowAndEditDay(sender: AnyObject) {
+    @IBAction func TapToShowAndEditDay(_ sender: AnyObject) {
     
     }
     
@@ -51,31 +52,56 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     // Number of section, current
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return calendar!.weeks.count
     }
     
     // number of rows in section
-    func tableView(tableView: UITableView, numberOfRowsInSection section:Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int
     {
         return calendar!.weeks[section].days.count
     }
     
     // get day cell
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellNames.cellDayIdentificator) as! CalendarTableViewCell
-        let day = calendar!.weeks[indexPath.section].days[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellDayIdentificator) as! CalendarTableViewCell
+        let day = calendar!.weeks[(indexPath as NSIndexPath).section].days[(indexPath as NSIndexPath).row]
         
-        cell.dayLabel.text = day.dayLabel
-        cell.weekLabel.text = day.weekLebel
-        cell.monthLabel.text = day.monthLabel
+        cell.day = day
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.ViewTapped))
+        cell.addGestureRecognizer(tap)
+        
         return cell
     }
     
+    //
+    @objc func ViewTapped(sender: UITapGestureRecognizer)  {
+       
+        let location : CGPoint = sender.location(in: self.calendarView)
+        let indexpath : IndexPath? = self.calendarView.indexPathForRow(at: location)
+        let cell: CalendarTableViewCell = self.calendarView.cellForRow(at: indexpath!) as! CalendarTableViewCell
+        performSegue(withIdentifier: Constants.cellEditSegue, sender: cell)
+      
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let distination = segue.destination as? EditDayViewController
+        if  let source = sender as? CalendarTableViewCell {
+            if segue.identifier == Constants.cellEditSegue
+            {
+                distination?.day = source.day
+                
+            }
+        }
+        
+    }
+    
+    
     // get week header cell
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellNames.cellWeekIdentificator) as! CalendarTableViewHeaderCell
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellWeekIdentificator) as! CalendarTableViewHeaderCell
         let week = calendar!.weeks[section]
         cell.weekCaption.text  = "Week #\(week.weekId)"
         
@@ -85,18 +111,18 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
 }
 
 // return current year
-extension NSCalendar{
+extension Foundation.Calendar{
     var currentYear : Int {
         get {
-            let date = NSDate()
-            let year = NSCalendar.currentCalendar().component(.Year,fromDate: date)
+            let date = Date()
+            let year = (Foundation.Calendar.current as NSCalendar).component(.year,from: date)
             return year
         }
     }
     var currentWeek : Int {
         get {
-            let date = NSDate()
-            let weak  = NSCalendar.currentCalendar().component(.WeekOfYear, fromDate: date)
+            let date = Date()
+            let weak  = (Foundation.Calendar.current as NSCalendar).component(.weekOfYear, from: date)
             return weak
         }
     }

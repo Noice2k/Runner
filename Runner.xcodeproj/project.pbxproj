@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7803FBCE1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7803FBCD1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift */; };
+		78320EA11D901FCF002CF71A /* EditDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78320EA01D901FCF002CF71A /* EditDayViewController.swift */; };
 		7857681D1D815B0900F79D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7857681C1D815B0900F79D88 /* AppDelegate.swift */; };
 		785768221D815B0900F79D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 785768201D815B0900F79D88 /* Main.storyboard */; };
 		785768241D815B0900F79D88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 785768231D815B0900F79D88 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		6DF733DB43DD4B1AD13021E9 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		6FCD255F4ED1D4B31DC62EA2 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		7803FBCD1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewHeaderCell.swift; sourceTree = "<group>"; };
+		78320EA01D901FCF002CF71A /* EditDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDayViewController.swift; sourceTree = "<group>"; };
 		785768191D815B0900F79D88 /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7857681C1D815B0900F79D88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		785768211D815B0900F79D88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 		7836BB121D8FC1A5007C35A1 /* CalandarViewFiles */ = {
 			isa = PBXGroup;
 			children = (
+				78320EA01D901FCF002CF71A /* EditDayViewController.swift */,
 				7803FBCD1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift */,
 				789E0A7B1D8294BA001B6867 /* CalendarTableViewCell.swift */,
 				789E0A7D1D829842001B6867 /* Calendar.swift */,
@@ -149,12 +152,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Igor Sinyakov";
 				TargetAttributes = {
 					785768181D815B0900F79D88 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 8ZX477FQPL;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -248,6 +252,7 @@
 				7888AC961D87F156002AECF3 /* TraningPlanViewController.swift in Sources */,
 				789E0A7C1D8294BA001B6867 /* CalendarTableViewCell.swift in Sources */,
 				7803FBCE1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift in Sources */,
+				78320EA11D901FCF002CF71A /* EditDayViewController.swift in Sources */,
 				789E0A7E1D829842001B6867 /* Calendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,8 +293,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -334,8 +341,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -354,6 +363,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -368,6 +378,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoicehome.Runner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -380,6 +391,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoicehome.Runner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
