@@ -31,6 +31,7 @@ open class CalendarDay
         self.monthLabel = df.string(from: day)
         df.dateFormat = "EEE"
         self.weekLebel = df.string(from: day)
+        
         self.dayData = day
         self.dayOfWeek = dayOfWeek
         self.month = month

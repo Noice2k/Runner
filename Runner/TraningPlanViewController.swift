@@ -70,12 +70,22 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
         
         cell.day = day
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.ViewTapped))
-        cell.addGestureRecognizer(tap)
+        //let tap = UITapGestureRecognizer(target: self, action: #selector(self.ViewTapped))
+        //cell.addGestureRecognizer(tap)
         
         return cell
     }
     
+    @IBAction func tapPlanButton(_ sender: UIButton) {
+     /*   let source = sender.superview?.superview
+        if let cell = source as? CalendarTableViewCell {
+            
+            performSegue(withIdentifier: Constants.cellEditSegue, sender: cell)
+
+        }
+ */
+        
+    }
     //
     @objc func ViewTapped(sender: UITapGestureRecognizer)  {
        
@@ -87,15 +97,13 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let distination = segue.destination as? EditDayViewController
-        if  let source = sender as? CalendarTableViewCell {
-            if segue.identifier == Constants.cellEditSegue
-            {
-                distination?.day = source.day
-                
+        if let btn = sender as? UIButton {
+            if let cell = btn.superview?.superview as? CalendarTableViewCell {
+                let distination = segue.destination as? EditDayViewController
+                distination?.day = cell.day
             }
         }
-        
+    
     }
     
     
