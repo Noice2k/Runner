@@ -7,17 +7,17 @@
 //
 
 import UIKit
+import Firebase
+
+   
 
 class EditDayViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
 
-    // MARK: - constants
-    let  KmData  = ["0","1","2","3","4","5","6","7","8","9"]
-    let trannignTypeComstant = ["Отдых","Востановление","Темповая","Интервальная","Дистанция","Произвольная"]
     
     // MARK: - controller
     override func viewDidLoad() {
         super.viewDidLoad()
-        UpdateUI()
+        
        // PickerKm.delegate = self
        // PickerKm.dataSource = self
         // Do any additional setup after loading the view.
@@ -32,7 +32,8 @@ class EditDayViewController: UIViewController,UIPickerViewDataSource,UIPickerVie
         distanceView.isHidden = true
         pickerDistance.delegate = self
         pickerDistance.dataSource = self
-       
+        
+        UpdateUI()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,7 +47,32 @@ class EditDayViewController: UIViewController,UIPickerViewDataSource,UIPickerVie
         if let d = day?.dayData {
             trainDataValue?.text = df.string(from: d)
         }
+        // convert the model value to the pickview value
+        if let newtype = day?.training?.type.rawValue {
+            pickerTrainType?.selectRow(newtype, inComponent: 0, animated: true)
+            btnTrainType?.setTitle(Traning.trannignTypeConstants[newtype], for: .normal)
+        }
+        if let dis =  day?.training?.distance{
+            pickerDistance?.selectRow(Int(dis), inComponent: 0, animated: true)
+            let hundred = Int(dis*10) % 10
+            pickerDistance?.selectRow(hundred, inComponent: 1, animated: true)
+            let tens = Int(dis*100) % 10
+            pickerDistance?.selectRow(tens, inComponent: 2, animated: true)
+            btnDistance?.setTitle("\(dis.to2dig()) km", for: .normal)
+       }
+        if let tm = day?.training?.time{
+            let hours = tm / 3600
+            let min = (tm/60) % 60
+            let sec = tm % 60
+            pickerTime?.selectRow(hours, inComponent: 0, animated: true)
+            pickerTime?.selectRow(min, inComponent: 2, animated: true)
+            pickerTime?.selectRow(sec, inComponent: 4, animated: true)
+            
+            btnTime?.setTitle("\(hours.to2dig()):\(min.to2dig()):\(sec.to2dig())", for: .normal)
+        }
         
+        
+       
     }
     
     // add animation for show/hide pickers
@@ -71,12 +97,22 @@ class EditDayViewController: UIViewController,UIPickerViewDataSource,UIPickerVie
     // MARK: - Model
     var day : CalendarDay?  {
         didSet{
+            if day?.training != nil {
+                current_distance = day!.training!.distance
+                current_type = day!.training!.type
+                current_time = day!.training!.time
+            }
             UpdateUI()
         }
     }
+    // Firebase
+    var dayRootRef : FIRDatabaseReference? = nil
     
+    var current_distance : Double = 0.0
+    var current_type : TraningTypeEnum = .custom
+    var current_time : Int = 0
     
-    // MARK - PickerView Functions
+    // MARK: - PickerView Functions
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
        let width = pickerView.bounds.width
@@ -126,7 +162,7 @@ class EditDayViewController: UIViewController,UIPickerViewDataSource,UIPickerVie
     // return component count
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == pickerTrainType {
-            return trannignTypeComstant.count
+            return Traning.trannignTypeConstants.count
         }
         if pickerView == pickerDistance {
             switch component {
@@ -161,7 +197,7 @@ class EditDayViewController: UIViewController,UIPickerViewDataSource,UIPickerVie
     // return component rows values
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == pickerTrainType {
-            return trannignTypeComstant[row]
+            return Traning.trannignTypeConstants[row]
         }
         
         if pickerView == pickerDistance {
@@ -192,13 +228,17 @@ class EditDayViewController: UIViewController,UIPickerViewDataSource,UIPickerVie
    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == pickerTrainType {
-            btnTrainType.setTitle(trannignTypeComstant[row], for: UIControlState.normal )
+            btnTrainType.setTitle(Traning.trannignTypeConstants[row], for: UIControlState.normal )
+            current_type = TraningTypeEnum(rawValue: row)!
         }
         if pickerView == pickerDistance {
             let ind1 = pickerView.selectedRow(inComponent: 0)
             let ind2 = pickerView.selectedRow(inComponent: 2)
             let ind3 = pickerView.selectedRow(inComponent: 3)
             let str = "\(ind1).\(ind2)\(ind3) Km"
+            
+            current_distance = Double(ind1) + Double(ind2)/10 + Double(ind3)/100
+            
             btnDistance.setTitle(str, for: .normal)
         }
         if pickerView == pickerTime {
@@ -207,11 +247,21 @@ class EditDayViewController: UIViewController,UIPickerViewDataSource,UIPickerVie
             let ind3 = pickerView.selectedRow(inComponent: 4)
             let str =  "\(ind1.to2dig()):\(ind2.to2dig()):\(ind3.to2dig())"
             btnTime.setTitle(str, for: .normal)
+            current_time = ind1*3600+ind2*60+ind3
         }
-        
     }
     // MARK: - Navigation
     @IBAction func SaveTraine(_ sender: UIButton) {
+        
+        let userref1 = dayRootRef?.child("distance")
+        userref1?.setValue( current_distance)
+        
+        let userref2 = dayRootRef?.child("type")
+        userref2?.setValue( current_type.rawValue)
+        
+        let userref3 = dayRootRef?.child("time")
+        userref3?.setValue( current_time)
+        
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
@@ -251,7 +301,7 @@ class EditDayViewController: UIViewController,UIPickerViewDataSource,UIPickerVie
     @IBAction func clickSelectTrainType(_ sender: UIButton) {
         currentPickerView = trainTypeView
         let row = pickerTrainType.selectedRow(inComponent: 0)
-        btnTrainType.setTitle(trannignTypeComstant[row], for: UIControlState.normal )
+        btnTrainType.setTitle(Traning.trannignTypeConstants[row], for: UIControlState.normal )
     }
     
     @IBOutlet weak var trainTypeView: UIStackView!
@@ -273,9 +323,13 @@ class EditDayViewController: UIViewController,UIPickerViewDataSource,UIPickerVie
 
 extension Int {
     func to2dig() -> String {
-    return String(format: "%02d",self)
+        return String(format: "%02d",self)
     }
 }
 
-
+extension Double {
+    func to2dig() -> String {
+       return String(format: "%0.2f",self)
+    }
+}
 

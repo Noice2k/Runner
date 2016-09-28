@@ -13,17 +13,33 @@ class CalendarTableViewCell: UITableViewCell {
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var weekLabel: UILabel!
-   
+    @IBOutlet weak var trainDistanceAndType: UILabel!
+    @IBOutlet weak var trainTypeAndSpeed: UILabel!
     var day : CalendarDay? {
-        willSet {
-            if newValue != nil {
-                dayLabel.text = newValue!.dayLabel
-                weekLabel.text = newValue!.weekLebel
-                monthLabel.text = newValue!.monthLabel
-                
-            }
-            
+        didSet {
+           UpdateUI()
         }
+    }
+    
+    private func  UpdateUI()  {
+        dayLabel.text = day!.dayLabel
+        weekLabel.text = day!.weekLebel
+        monthLabel.text = day!.monthLabel
+        trainTypeAndSpeed.text = ""
+        trainDistanceAndType.text = Traning.trannignTypeConstants[0]
+    
+        if day!.training != nil {
+            let dist = day!.training!.distance.to2dig()
+            let type =  Traning.trannignTypeConstants[day!.training!.type.rawValue]
+            trainDistanceAndType.text = "\(dist)km"
+            var speed : String
+            if day!.training?.distance != 0 {
+                speed  = Traning.getTimePerKmSped(time: day!.training!.time, dis: day!.training!.distance)
+            } else { speed = ""}
+
+            trainTypeAndSpeed.text = "\(type)\r\n\(speed)"
+        }
+
     }
     
     override func awakeFromNib() {
@@ -32,12 +48,4 @@ class CalendarTableViewCell: UITableViewCell {
   //      let tap = UITapGestureRecognizer(target: self, action: #selector(self.ViewTapped))
    //     addGestureRecognizer(tap)
     }
-    
-    //@objc func ViewTapped(sender: UITapGestureRecognizer)  {
-  //
-//        perfomseg
-  //      print("Tap")
-   // }
-    
-    
 }

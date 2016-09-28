@@ -16,13 +16,16 @@ open class CalendarDay
     var weekLebel: String
     var monthLabel: String
     
+    var path : String
+    
     var dayData: Date
     var dayOfWeek: Int
     var month : Int
     
+    var training : Traning? = nil
     
     
-    init(day: Date,dayOfWeek: Int, month : Int)
+    init(day: Date,weekId: Int, dayOfWeek: Int, month : Int)
     {
         let df = DateFormatter()
         df.dateFormat = "dd"
@@ -32,9 +35,14 @@ open class CalendarDay
         df.dateFormat = "EEE"
         self.weekLebel = df.string(from: day)
         
+        df.dateFormat = "MM-dd"
+        self.path = df.string(from: day)
+        
+        
         self.dayData = day
         self.dayOfWeek = dayOfWeek
         self.month = month
+        
     }
 
 }
@@ -44,7 +52,7 @@ open class CalendarWeek
 {
     //MARK : model
     var days = [CalendarDay]()
-    var weekId :  Int
+    var weekId :  Int = 0
     
     init(weekid : Int){
         self.weekId = weekid
@@ -62,6 +70,18 @@ class Calendar
     var weeks =  [CalendarWeek]()
     // the count days in current year
     var daysInYear : Int
+    
+    // all days in one array. we will use it for load data from database
+    var allDays = [String : CalendarDay]()
+    
+    
+    var totalDistance: Double = 0
+    var runDistance : Double = 0
+    var runTime : Int = 0
+    // finished run count
+    var runCount: Int = 0
+    // total count of run
+    var totalRunCount: Int = 0
     
     //MARK : Initilization
     init (year : Int ){
@@ -93,13 +113,41 @@ class Calendar
                     }
                     // get the day attribute
                     let month = (Foundation.Calendar.current as NSCalendar).component(.month, from: newdate)
-                    let newday = CalendarDay(day:newdate,dayOfWeek: dayofweek, month: month)
+                    let newday = CalendarDay(day:newdate, weekId: currentWeek!.weekId ,dayOfWeek: dayofweek, month: month)
                     currentWeek!.days += [newday]
+                    allDays[newday.path] = newday
                 }
                 
             }
+            // read data from DataBase
+            
+            
         }
     }
+    func updateStatistic() {
+        var alldist :Double = 0
+        var rundist :Double = 0
+        var allTime :Int = 0
+        var rcount : Int = 0
+        var acount : Int = 0;
+        for day in allDays {
+            if let train = day.value.training {
+                alldist += train.distance
+                acount += 1
+                if train.time > 0 {
+                    rundist += train.distance
+                    allTime += train.time
+                    rcount += 1
+                }
+            }
+        }
+        totalDistance = alldist
+        runDistance   = rundist
+        runTime = allTime
+        totalRunCount = acount
+        runCount = rcount
+    }
+    
 }
 
 
