@@ -52,8 +52,20 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
         
         // create the calendar
         calendar = Calendar(year: Foundation.Calendar.current.currentYear)
+        // set expand style for -2..+2 weeks
+        let currentweekid = Foundation.Calendar.current.currentWeek
+        for i in 0...calendar!.weeks.count-1 {
+            if i < currentweekid-2 {
+                calendar!.weeks[i].expandAll = false
+            } else if i > currentweekid+1 {
+                calendar!.weeks[i].expandAll = false
+            } else {
+                calendar!.weeks[i].expandAll = true
+            }
+        }
+        
         // set the current day as visible day
-        let indexpath = IndexPath(row: 0, section: Foundation.Calendar.current.currentWeek-1)
+        let indexpath = IndexPath(row: 0, section: currentweekid-1)
         calendarView.selectRow(at: indexpath, animated: true, scrollPosition: .top)
         
         // load data from database
@@ -79,13 +91,21 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
         })
     }
     
+    @IBAction func CollapsWeek(_ sender: UIButton) {
+        if let cell = sender.superview?.superview?.superview as? CalendarTableViewHeaderCell {
+            cell.week!.expandAll = !cell.week!.expandAll
+            cell.changeExpandStyle()
+            calendarView.reloadData()
+        }
+
+    }
     
     @IBOutlet weak var calendarView: UITableView! {
         didSet {
             calendarView.delegate = self
             calendarView.dataSource = self
             calendarView.rowHeight = 50
-            calendarView.sectionHeaderHeight = 35
+            calendarView.sectionHeaderHeight = 50
         }
     }
     
@@ -123,6 +143,10 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
     // number of rows in section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int
     {
+        if calendar!.weeks[section].expandAll == false{
+            return 0
+        }
+        
         return calendar!.weeks[section].days.count
     }
     
@@ -131,12 +155,7 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellDayIdentificator) as! CalendarTableViewCell
         let day = calendar!.weeks[(indexPath as NSIndexPath).section].days[(indexPath as NSIndexPath).row]
-        
         cell.day = day
-        
-        //let tap = UITapGestureRecognizer(target: self, action: #selector(self.ViewTapped))
-        //cell.addGestureRecognizer(tap)
-        
         return cell
     }
     
@@ -171,7 +190,7 @@ class TraningPlanViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellWeekIdentificator) as! CalendarTableViewHeaderCell
         let week = calendar!.weeks[section]
         cell.weekCaption.text  = "Week #\(week.weekId)"
-        
+        cell.week = week
         return cell
     }
  

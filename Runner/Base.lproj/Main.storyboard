@@ -178,48 +178,63 @@
                                         <rect key="frame" x="0.0" y="72" width="383" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uf0-Ag-EbO" id="hKW-P6-Lai">
-                                            <frame key="frameInset" width="383" height="45"/>
+                                            <frame key="frameInset" width="383" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0 km" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFt-tz-Vaz">
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V78-0g-1hx">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0 run" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcY-zW-bsf">
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeekId" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDm-ps-jfO">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTi-ab-HXm">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeekId" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDm-ps-jfO">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0 run" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcY-zW-bsf">
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0 km" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFt-tz-Vaz">
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V78-0g-1hx">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="trC-Ra-lSR">
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="AMV-Pc-inK"/>
+                                                                <constraint firstAttribute="width" constant="50" id="YG9-Rh-scc"/>
+                                                            </constraints>
+                                                            <state key="normal" image="ArrowUp"/>
+                                                            <connections>
+                                                                <action selector="CollapsWeek:" destination="HAX-m5-O40" eventType="touchUpInside" id="Hi5-iT-28p"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="kFt-tz-Vaz" firstAttribute="width" secondItem="dcY-zW-bsf" secondAttribute="width" id="KCw-Jv-uSd"/>
+                                                        <constraint firstItem="dcY-zW-bsf" firstAttribute="width" secondItem="TDm-ps-jfO" secondAttribute="width" id="OQ0-La-u47"/>
+                                                        <constraint firstItem="V78-0g-1hx" firstAttribute="width" secondItem="kFt-tz-Vaz" secondAttribute="width" id="Vf8-No-fpz"/>
+                                                    </constraints>
+                                                </stackView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="kFt-tz-Vaz" firstAttribute="width" secondItem="dcY-zW-bsf" secondAttribute="width" id="10J-Op-gNI"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="TDm-ps-jfO" secondAttribute="leading" constant="-10" id="2Cf-SA-BPW"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="V78-0g-1hx" secondAttribute="trailing" constant="10" id="4wn-l2-tKS"/>
-                                                <constraint firstItem="dcY-zW-bsf" firstAttribute="width" secondItem="TDm-ps-jfO" secondAttribute="width" id="9TF-6T-xUm"/>
-                                                <constraint firstItem="TDm-ps-jfO" firstAttribute="top" secondItem="hKW-P6-Lai" secondAttribute="topMargin" id="IxD-ED-vrV"/>
-                                                <constraint firstItem="kFt-tz-Vaz" firstAttribute="leading" secondItem="dcY-zW-bsf" secondAttribute="trailing" constant="10" id="JNF-8n-CS2"/>
-                                                <constraint firstItem="V78-0g-1hx" firstAttribute="centerY" secondItem="kFt-tz-Vaz" secondAttribute="centerY" id="RD5-Rf-TyR"/>
-                                                <constraint firstItem="dcY-zW-bsf" firstAttribute="centerY" secondItem="TDm-ps-jfO" secondAttribute="centerY" id="Uy1-4t-8f5"/>
-                                                <constraint firstItem="V78-0g-1hx" firstAttribute="width" secondItem="kFt-tz-Vaz" secondAttribute="width" id="Vo6-RD-hdm"/>
-                                                <constraint firstItem="kFt-tz-Vaz" firstAttribute="centerY" secondItem="dcY-zW-bsf" secondAttribute="centerY" id="XIk-vN-YZg"/>
-                                                <constraint firstItem="V78-0g-1hx" firstAttribute="leading" secondItem="kFt-tz-Vaz" secondAttribute="trailing" constant="10" id="Xrz-la-epA"/>
-                                                <constraint firstItem="dcY-zW-bsf" firstAttribute="leading" secondItem="TDm-ps-jfO" secondAttribute="trailing" constant="10" id="vll-q3-fyP"/>
+                                                <constraint firstItem="hTi-ab-HXm" firstAttribute="leading" secondItem="hKW-P6-Lai" secondAttribute="leadingMargin" id="3KN-US-NE7"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="hTi-ab-HXm" secondAttribute="trailing" id="5OB-gw-GP9"/>
+                                                <constraint firstItem="hTi-ab-HXm" firstAttribute="centerY" secondItem="hKW-P6-Lai" secondAttribute="centerY" id="d7p-23-icg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
                                         <connections>
+                                            <outlet property="collapsButton" destination="trC-Ra-lSR" id="kQv-aX-fRF"/>
+                                            <outlet property="distCaption" destination="kFt-tz-Vaz" id="pdb-0f-hYI"/>
+                                            <outlet property="runCaption" destination="dcY-zW-bsf" id="XYq-98-SSi"/>
+                                            <outlet property="timeCaption" destination="V78-0g-1hx" id="aoe-7j-uDX"/>
                                             <outlet property="weekCaption" destination="TDm-ps-jfO" id="jQB-ZB-HkT"/>
                                         </connections>
                                     </tableViewCell>
@@ -246,7 +261,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U28-6I-hZN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Og5-3p-0bo"/>
             </objects>
             <point key="canvasLocation" x="1008.8" y="112.89355322338831"/>
         </scene>
@@ -341,14 +355,7 @@
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qYi-IL-Z5X">
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zJ-r1-Ovf">
-                                                <frame key="frameInset" width="5" height="216"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mys-0k-u4v">
-                                                <frame key="frameInset" minX="5" width="339" height="216"/>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mys-0k-u4v">
                                                 <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                             </pickerView>
                                         </subviews>
@@ -371,15 +378,7 @@
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jES-vr-J9r">
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36r-Hf-7h2">
-                                                <frame key="frameInset" width="5" height="216"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fUi-WX-Bd0">
-                                                <frame key="frameInset" minX="5" width="339" height="216"/>
-                                            </pickerView>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUi-WX-Bd0"/>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJO-ia-zpy">
@@ -400,11 +399,6 @@
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycu-6a-kPw">
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oXh-QR-2LW">
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hn4-D6-RO0"/>
                                         </subviews>
                                     </stackView>
@@ -468,6 +462,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ArrowUp" width="24" height="24"/>
         <image name="VSelector" width="10" height="20"/>
     </resources>
 </document>

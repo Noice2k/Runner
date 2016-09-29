@@ -53,6 +53,14 @@ open class CalendarWeek
     //MARK : model
     var days = [CalendarDay]()
     var weekId :  Int = 0
+    var plannedRun : Int = 0
+    var realRun   : Int = 0
+    var plannedDist : Double = 0
+    var runDist : Double = 0
+    
+    var totalTime: Int = 0
+    
+    var expandAll : Bool = true
     
     init(weekid : Int){
         self.weekId = weekid
@@ -146,6 +154,31 @@ class Calendar
         runTime = allTime
         totalRunCount = acount
         runCount = rcount
+        
+        for week in weeks {
+            alldist = 0
+            rundist = 0
+            allTime = 0
+            rcount  = 0
+            acount  = 0;
+        
+            for day in week.days {
+                if let train = day.training {
+                    alldist += train.distance
+                    acount += 1
+                    if train.time > 0 {
+                        rundist += train.distance
+                        allTime += train.time
+                        rcount += 1
+                    }
+                }
+            }
+            week.plannedDist = alldist
+            week.runDist = rundist
+            week.plannedRun = acount
+            week.realRun = rcount
+            week.totalTime = allTime
+        }
     }
     
 }
