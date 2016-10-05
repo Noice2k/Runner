@@ -8,9 +8,27 @@
 
 import Foundation
 import Firebase
+import CoreLocation
 
 enum TraningTypeEnum: Int {
     case rest = 0, recover, pace, interval, distance, custom
+}
+
+
+class TrainingLap
+{
+    // empty array of location point
+    var points =  [CLLocation]()
+    var distance : Double = 0
+    var startTime : Date?
+    var endTime : Date?
+    var duration : Int = 0
+    var name : String = ""
+    
+    init() {
+        name = "\(Date())"
+    }
+    
 }
 
 open class Traning

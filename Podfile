@@ -9,5 +9,6 @@ target 'Runner' do
 pod ‘Firebase/Core’
 pod ‘Firebase/Database’
 pod ‘Firebase/Auth’ 
+pod 'Mapbox-iOS-SDK', '~> 3.3.4'
 
 end

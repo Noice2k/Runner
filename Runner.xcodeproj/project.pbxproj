@@ -15,6 +15,8 @@
 		785768241D815B0900F79D88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 785768231D815B0900F79D88 /* Assets.xcassets */; };
 		785768271D815B0900F79D88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 785768251D815B0900F79D88 /* LaunchScreen.storyboard */; };
 		786A201C1D991AFB009BA3E6 /* GrayActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786A201B1D991AFB009BA3E6 /* GrayActivityIndicator.swift */; };
+		7875E7621D9E66B50043C0ED /* OpenBoxMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7875E7611D9E66B50043C0ED /* OpenBoxMapView.swift */; };
+		7875E7641D9E697D0043C0ED /* TrainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7875E7631D9E697D0043C0ED /* TrainViewController.swift */; };
 		7888AC961D87F156002AECF3 /* TraningPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888AC951D87F156002AECF3 /* TraningPlanViewController.swift */; };
 		789E0A7C1D8294BA001B6867 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789E0A7B1D8294BA001B6867 /* CalendarTableViewCell.swift */; };
 		789E0A7E1D829842001B6867 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789E0A7D1D829842001B6867 /* Calendar.swift */; };
@@ -36,6 +38,8 @@
 		785768261D815B0900F79D88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		785768281D815B0900F79D88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		786A201B1D991AFB009BA3E6 /* GrayActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrayActivityIndicator.swift; sourceTree = "<group>"; };
+		7875E7611D9E66B50043C0ED /* OpenBoxMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenBoxMapView.swift; sourceTree = "<group>"; };
+		7875E7631D9E697D0043C0ED /* TrainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainViewController.swift; sourceTree = "<group>"; };
 		7888AC951D87F156002AECF3 /* TraningPlanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraningPlanViewController.swift; sourceTree = "<group>"; };
 		789E0A7B1D8294BA001B6867 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		789E0A7D1D829842001B6867 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -104,11 +108,13 @@
 		7857681B1D815B0900F79D88 /* Runner */ = {
 			isa = PBXGroup;
 			children = (
-				7836BB121D8FC1A5007C35A1 /* CalandarViewFiles */,
-				7857681C1D815B0900F79D88 /* AppDelegate.swift */,
 				786A201D1D991B02009BA3E6 /* Utilites */,
-				785768201D815B0900F79D88 /* Main.storyboard */,
+				7836BB121D8FC1A5007C35A1 /* CalandarViewFiles */,
+				7875E7651D9E69900043C0ED /* TrainViewFiles */,
 				781D486D1D93D1AF00F1B0F1 /* Training.swift */,
+				7875E7631D9E697D0043C0ED /* TrainViewController.swift */,
+				785768201D815B0900F79D88 /* Main.storyboard */,
+				7857681C1D815B0900F79D88 /* AppDelegate.swift */,
 				789E0A781D828DF0001B6867 /* Supporting Files */,
 			);
 			path = Runner;
@@ -120,6 +126,14 @@
 				786A201B1D991AFB009BA3E6 /* GrayActivityIndicator.swift */,
 			);
 			name = Utilites;
+			sourceTree = "<group>";
+		};
+		7875E7651D9E69900043C0ED /* TrainViewFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7875E7611D9E66B50043C0ED /* OpenBoxMapView.swift */,
+			);
+			name = TrainViewFiles;
 			sourceTree = "<group>";
 		};
 		789E0A781D828DF0001B6867 /* Supporting Files */ = {
@@ -265,6 +279,8 @@
 				7803FBCE1D894B6300FF2D2E /* CalendarTableViewHeaderCell.swift in Sources */,
 				781D486E1D93D1AF00F1B0F1 /* Training.swift in Sources */,
 				78320EA11D901FCF002CF71A /* EditDayViewController.swift in Sources */,
+				7875E7641D9E697D0043C0ED /* TrainViewController.swift in Sources */,
+				7875E7621D9E66B50043C0ED /* OpenBoxMapView.swift in Sources */,
 				789E0A7E1D829842001B6867 /* Calendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

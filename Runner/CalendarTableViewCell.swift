@@ -15,6 +15,7 @@ class CalendarTableViewCell: UITableViewCell {
     @IBOutlet weak var weekLabel: UILabel!
     @IBOutlet weak var trainDistanceAndType: UILabel!
     @IBOutlet weak var trainTypeAndSpeed: UILabel!
+    @IBOutlet weak var buttonAddTrain: UIButton!
     var day : CalendarDay? {
         didSet {
            UpdateUI()
@@ -27,7 +28,9 @@ class CalendarTableViewCell: UITableViewCell {
         monthLabel.text = day!.monthLabel
         trainTypeAndSpeed.text = ""
         trainDistanceAndType.text = Traning.trannignTypeConstants[0]
-    
+        buttonAddTrain.isHidden = day!.readOnlyTrain
+        
+        
         if day!.training != nil {
             let dist = day!.training!.distance.to2dig()
             let type =  Traning.trannignTypeConstants[day!.training!.type.rawValue]

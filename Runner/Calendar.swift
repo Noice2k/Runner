@@ -22,6 +22,8 @@ open class CalendarDay
     var dayOfWeek: Int
     var month : Int
     
+    var readOnlyTrain: Bool = true
+    
     var training : Traning? = nil
     
     
@@ -122,6 +124,7 @@ class Calendar
                     // get the day attribute
                     let month = (Foundation.Calendar.current as NSCalendar).component(.month, from: newdate)
                     let newday = CalendarDay(day:newdate, weekId: currentWeek!.weekId ,dayOfWeek: dayofweek, month: month)
+                    newday.readOnlyTrain = weekId >= (Foundation.Calendar.current.currentWeek + 1)
                     currentWeek!.days += [newday]
                     allDays[newday.path] = newday
                 }
