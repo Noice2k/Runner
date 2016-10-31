@@ -9,14 +9,19 @@
 import UIKit
 import CoreLocation
 import Mapbox
+import AVFoundation
 
-class TrainViewController: UIViewController, CLLocationManagerDelegate {
+class TrainViewController: UIViewController, CLLocationManagerDelegate, MGLMapViewDelegate {
 
+    // MARK : Outlest
     @IBOutlet weak var buttonStartTrain: UIButton!
-    @IBOutlet weak var buttonStopTrain: UIButton!
-    @IBOutlet weak var buttonPauseTrain: UIButton!
     
     @IBOutlet weak var openBoxMapView: OpenBoxMapView!
+    
+    @IBOutlet weak var labelClimb: UILabel!
+    @IBOutlet weak var labelHeartRate: UILabel!
+    @IBOutlet weak var labelTrainTime: UILabel!
+    @IBOutlet weak var labelTrainDistance: UILabel!
     
     @IBOutlet weak var heartStatusView: UIView!
     @IBOutlet weak var heartStatusHeigth: NSLayoutConstraint!
@@ -24,13 +29,15 @@ class TrainViewController: UIViewController, CLLocationManagerDelegate {
     var locationMamager = CLLocationManager()
     
     var timer = Timer()
+   
     var totalDistance : Double = 0.0
     
+    var totalTime : Int = 0
     var beginTime : Date!
+    
     var currentTrack: [CLLocationCoordinate2D] = []
     var lastLoc : CLLocation?
-    var paused  : Bool = false
-    
+   
     var distanceForMarker : Double = 0
     
     // the current lap
@@ -54,53 +61,62 @@ class TrainViewController: UIViewController, CLLocationManagerDelegate {
     func ShowUI(_ show: Bool)
     {
         buttonStartTrain.isHidden = show
-        buttonStopTrain.isHidden = !show
-        buttonPauseTrain.isHidden = !show
         heartStatusView.isHidden = !show
     }
     
     
-    @IBOutlet weak var laberTrainDuration: UILabel!
+    
     
     // start tracking
     @IBAction func buttonStartClick(_ sender: UIButton) {
-        trackingUser = true
-        beginTime = Date()
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.timerUpdate), userInfo: nil, repeats: true)
-        // new current lap
-        currentLap = TrainingLap()
-        
+        if trackingUser == false {
+            // start tracking
+            trackingUser = true
+            beginTime = Date()
+            timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.timerUpdate), userInfo: nil, repeats: true)
+            // new current lap
+            currentLap = TrainingLap()
+            
+            let speech = AVSpeechSynthesizer()
+            let text = "дистанция 5 after 34 minutes 20 seconds"
+            let utterance = AVSpeechUtterance(string: text)
+            utterance.voice = AVSpeechSynthesisVoice(language: "ru-RU")
+            utterance.rate = 0.3
+            speech.speak(utterance)
+            
+        } else {
+            // stop tracking
+            trackingUser = false
+            let alert = UIAlertController(title: "конец", message: "cjjmotybtui", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "pfrjyxbnm", style: UIAlertActionStyle.default, handler: nil))
+            present(alert, animated: false) {
+                
+            }
+            timer.invalidate()
+        }
         
     }
     
-    @IBOutlet weak var labelTrainDistance: UILabel!
     func timerUpdate() {
         let current = Date()
         let time = current.timeIntervalSince(beginTime!)
         let timeInt = Int(time)
         
-        laberTrainDuration.text = timeInt.ToTime()
+        labelTrainTime.text = timeInt.ToTime()
     }
     
-    // user click Paused
-    @IBAction func buttonPauseClick(_ sender: UIButton) {
-        paused = !paused
-        
-    }
     
     @IBAction func buttonStopClick(_ sender: UIButton) {
     
         // show alert windows 
         
-        trackingUser = false
-        timer.invalidate()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // hide view 
         ShowUI(false)
-        
+        // setup location manager
         self.locationMamager.requestAlwaysAuthorization()
         self.locationMamager.requestWhenInUseAuthorization()
         
@@ -113,6 +129,7 @@ class TrainViewController: UIViewController, CLLocationManagerDelegate {
         // Do any additional setup after loading the view.
         openBoxMapView.setCenter(CLLocationCoordinate2D(latitude: 45.5076, longitude: -122.6736), animated: false)
         openBoxMapView.setZoomLevel(14, animated: false)
+        openBoxMapView.delegate = self
         
     }
     // MARK: location manager routing
@@ -125,36 +142,31 @@ class TrainViewController: UIViewController, CLLocationManagerDelegate {
             
             // add coordinate to Tracker
             if trackingUser {
-                
-                if !paused {
-                    if distanceForMarker <= totalDistance {
-                        // increase distance
-                        distanceForMarker += 1000
-                        // add  annotation with point
-                        let annotation = MGLPointAnnotation()
-                        annotation.coordinate =  loc.coordinate
-                        annotation.title = "\(Int(distanceForMarker/1000))"
-                        openBoxMapView.addAnnotation(annotation)
-                    }
-                    currentLap?.points += [loc]
-                    currentTrack += [CLLocationCoordinate2DMake( loc.coordinate.latitude, loc.coordinate.longitude)]
-                    if lastLoc != nil {
-                        let dist = loc.distance(from: lastLoc!)
-                        totalDistance += dist
-                        labelTrainDistance.text = totalDistance.to2dig()
-                        print(dist)
-                        print("location : \(loc.coordinate.longitude)-\(loc.coordinate.latitude)")
-                    }
-                    // update
-                    let line = MGLPolyline(coordinates: &currentTrack, count: UInt(currentTrack.count))
-                    line.title = currentLap?.name
-                    openBoxMapView.addAnnotation(line)}
+                if distanceForMarker <= totalDistance {
+                    // add  annotation with point
+                    let annotation = MGLPointAnnotation()
+                    annotation.coordinate =  loc.coordinate
+                    annotation.title = "\(Int(distanceForMarker/1000))"
+                    openBoxMapView.addAnnotation(annotation)
+                    // increase distance
+                    distanceForMarker += 1000
+                    
+                }
+                currentLap?.points += [loc]
+                currentTrack += [CLLocationCoordinate2DMake( loc.coordinate.latitude, loc.coordinate.longitude)]
+                if lastLoc != nil {
+                    let dist = loc.distance(from: lastLoc!)
+                    totalDistance += dist
+                    labelTrainDistance.text = totalDistance.to2dig()
+                    print(dist)
+                    print("location : \(loc.coordinate.longitude)-\(loc.coordinate.latitude)")
+                }
+                // update
+                let line = MGLPolyline(coordinates: &currentTrack, count: UInt(currentTrack.count))
+                line.title = currentLap?.name
+                openBoxMapView.addAnnotation(line)}
                 lastLoc = loc
-            }
-            else {
-                lastLoc = nil
-                currentTrack = []
-            }
+            
             
             // set
         }
@@ -166,7 +178,24 @@ class TrainViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
+    // get image for annotation
+    func mapView(_ mapView: MGLMapView, imageFor annotation: MGLAnnotation) -> MGLAnnotationImage? {
+        
+        let title = annotation.title!
+        let id = "Pin\(title!)"
+        var annotationImage = mapView.dequeueReusableAnnotationImage(withIdentifier: id)
+        //if annotationImage == nil {
+            // Leaning Tower of Pisa by Stefan Spieler from the Noun Project.
+            var image = UIImage(named: "Pin")!
+            image = textToImage(drawText: title!, inImage: image, atPoint: CGPoint(x: 31,y: 0))
+            
+            // Initialize the ‘pisa’ annotation image with the UIImage we just loaded.
+            annotationImage = MGLAnnotationImage(image: image, reuseIdentifier: id)
+      //  }
+        return annotationImage
+    }
+ 
     /*
     // MARK: - Navigation
 
@@ -176,6 +205,49 @@ class TrainViewController: UIViewController, CLLocationManagerDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+
+    // MARK: Utilites
+    
+    // add text label to image
+    func textToImage(drawText: String, inImage: UIImage, atPoint: CGPoint) -> UIImage{
+        
+        // Setup the font specific variables
+        let textColor = UIColor.black
+        let textFont = UIFont.systemFont(ofSize: 12.0)
+        let textStyle = NSMutableParagraphStyle()
+        //let fontHeigth = textFont.pointSize
+        textStyle.alignment = .center
+        
+        // Setup the image context using the passed image
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(inImage.size, false, scale)
+        
+        // Setup the font attributes that will be later used to dictate how the text should be drawn
+        let textFontAttributes = [
+            NSFontAttributeName: textFont,
+            NSForegroundColorAttributeName: textColor,
+            NSParagraphStyleAttributeName : textStyle
+        ]
+        
+        // Put the image into a rectangle as large as the original image
+        inImage.draw(in: CGRect(x: 0, y: 0, width: inImage.size.width, height: inImage.size.height))
+        
+        // Create a point within the space that is as bit as the image
+        //    let rect = CGRect(x: 0, y: 0, width: inImage.size.width, height: inImage.size.height)
+        let rect = CGRect(x: 0, y: 2, width: inImage.size.width, height: inImage.size.height)
+        
+        // Draw the text into an image
+        drawText.draw(in: rect, withAttributes:  textFontAttributes)
+        
+        // Create a new image out of the images we have created
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        // End the context now that we have the image we need
+        UIGraphicsEndImageContext()
+        
+        //Pass the image back up to the caller
+        return newImage!
+    }
 
 }
 
